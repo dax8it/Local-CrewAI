@@ -68,36 +68,56 @@ Let's create wonders together with the power and simplicity of crewAI.
 Follow These Steps if using Anaconda env:
 
 1. Create Anaconda environment (myenv is the name of your environment)
+    ```bash
     conda create --name myenv python=3.12
+    ```
 
 2. Activate your conda env
+    ```bash
     conda activate myenv
+    ```
 
 3. Install Crewai and tools
+    ```bash
     pip install "crewai[tools]"
+    ```
 
 4. Create a crew (replace crew_name)
-    crewai create crew crew_name > 
+    ```bash
+    crewai create crew crew_name
+    ``` 
     
 5. Go to that newly created directory > make sure your conda env is active
+    ```bash
     conda activate environment myenv
+    ```
 
 5. Open VScode go to directory
 
 6. Use .env file for API keys (copy keys into the env file for openai, serper,g google) install the env
+    ```bash
     pip install python-dotenv
+    ```
 
 7. Langchain install: For ollama local models 
+    ```bash
     pip install langchain_ollama
+    ```
 
 8. Install google gemini to use in project
+    ```bash
     pip install langchain_google_genai
+    ```
 
 9. Install all the dependencies
+    ```bash
     poetry install
+    ```
 
 10. Start crew
+    ```bash
     crewai run
+    ```
 
 11. Enter topic
 
