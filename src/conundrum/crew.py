@@ -2,22 +2,27 @@ import os
 from datetime import datetime
 from crewai import Agent, Crew, Task, Process
 from crewai.project import CrewBase, agent, crew, task
-from langchain_ollama import ChatOllama
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_community.llms import OpenAI, Ollama
 from dotenv import load_dotenv
 from crewai_tools import SerperDevTool
 
 load_dotenv()
 
 
-llm_flash = ChatGoogleGenerativeAI(model="gemini-1.5-flash-exp-0827", temperature=0.5)
-llm_llama = ChatOllama(model="llama3.1:70b", base_url="http://localhost:11434")
-llm_mistral = ChatOllama(model="mistral-large:latest", base_url="http://localhost:11434")
-llm_gemma = ChatOllama(model="gemma2:27b", base_url="http://localhost:11434")
-llm_hermes = ChatOllama(model="hermes3:70b", base_url="http://localhost:11434")
+# Initialize the Gemini model using LiteLLM
+# llm_gemini = litellm_model("gemini-1.5-flash-exp-0827")
+# llm_flash = Gemini(model="gemini-1.5-flash-exp-0827", temperature=0.5)
+# llm_llama = Ollama(model="llama3.1", base_url="http://localhost:11434")
+llm_mistral = Ollama(model="mistral-large-latest", base_url="http://localhost:11434")
+# llm_gemma = Ollama(model="gemma2:27b", base_url="http://localhost:11434")
+# llm_hermes = Ollama(model="hermes3:70b", base_url="http://localhost:11434")
+
+
+
+
 
 # manager_llm = ChatOllama(model="hermes3:70b")
-manager_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-exp-0827", temperature=0.5)
+manager_llm = llm_mistral
 
 # Uncomment the following line to use an example of a custom tool
 # from conundrum_crew.tools.custom_tool import MyCustomTool
@@ -56,7 +61,7 @@ class ConundrumCrew():
 		return Agent(
 			config=self.agents_config['reporting_analyst'],
 			verbose=True,
-			llm=llm_hermes,
+			llm=llm_mistral,
         	max_iterations=10,
         	max_time=120,	
 		)
@@ -81,7 +86,7 @@ class ConundrumCrew():
 		return Crew(
 			agents=self.agents, # Automatically created by the @agent decorator
 			tasks=self.tasks, # Automatically created by the @task decorator
-			manager_llm=manager_llm,
+			manager_llm=llm_mistral,
 			process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
 			verbose=True,
 			# process=Process.sequential,
