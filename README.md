@@ -23,7 +23,7 @@ poetry install
 ```
 ### Customizing
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+**Add your `OPENAI_API_KEY`, `GOOGLE_API_KEY`,`SERPER_API_KEY` into the `.env` file**
 
 - Modify `src/conundrum/config/agents.yaml` to define your agents
 - Modify `src/conundrum/config/tasks.yaml` to define your tasks
@@ -44,7 +44,7 @@ poetry run conundrum
 
 This command initializes the conundrum Crew, assembling the agents and assigning them tasks as defined in your configuration.
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+This example, unmodified, will run the create a `research.md`and `report.md` file with the output of a research on LLMs in the root folder.
 
 ## Understanding Your Crew
 
@@ -98,28 +98,17 @@ Follow These Steps if using Anaconda env:
     ```bash
     pip install python-dotenv
     ```
-
-7. Langchain install: For ollama local models 
-    ```bash
-    pip install langchain_ollama
-    ```
-
-8. Install google gemini to use in project
-    ```bash
-    pip install langchain_google_genai
-    ```
-
-9. Install all the dependencies
+7. Install all the dependencies
     ```bash
     poetry install
     ```
 
-10. Start crew
+8. Start crew
     ```bash
     crewai run
     ```
 
-11. Enter topic
+9. Enter topic
 
 Note: In order to allow for user input to run the crew, we added code to main.py
 def get_user_topic():
@@ -132,6 +121,7 @@ def get_user_topic():
         'topic': topic
     }
 
+10. Two documents are generated, research.md and report.md 
 
 
 
