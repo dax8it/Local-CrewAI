@@ -2,11 +2,13 @@
 name = "conundrum"
 version = "0.1.0"
 description = "conundrum using crewAI"
-authors = ["Your Name <you@example.com>"]
+authors = ["Your Name <alex@alexcovo.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
-crewai = { extras = ["tools"], version = "^0.51.0" }
+crewai = { extras = ["tools"], version = ">=0.61.0,<1.0.0" }
+
+
 
 [tool.poetry.scripts]
 conundrum = "conundrum.main:run"
