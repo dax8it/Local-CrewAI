@@ -61,13 +61,11 @@ For support, questions, or feedback regarding the Conundrum Crew or crewAI.
 Let's create wonders together with the power and simplicity of crewAI.
 
 ---
-# Actual installation process for this crew.
 
-# Installing this specific crew.
+# This repo is for local llm usage (plus Gemini)
+## Easy install.
 
-Follow These Steps if using Anaconda env:
-
-1. Create Anaconda environment (myenv is the name of your environment)
+1. Create Anaconda environment (replace 'myenv' with name)
     ```bash
     conda create --name myenv python=3.12
     ```
@@ -82,7 +80,7 @@ Follow These Steps if using Anaconda env:
     pip install "crewai[tools]"
     ```
 
-4. Create a crew (replace crew_name)
+4. Create a crew (replace 'crew_name' with a name)
     ```bash
     crewai create crew crew_name
     ``` 
@@ -121,7 +119,9 @@ def get_user_topic():
         'topic': topic
     }
 
-10. Two documents are generated, research.md and report.md 
+10. Two documents are generated, research.md and report.md
+
+11. YOu have the option of running an LLM_Manager as well. 
 
 
 
