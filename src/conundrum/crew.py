@@ -1,42 +1,24 @@
 import os
-from datetime import datetime
-from crewai import Agent, Crew, Task, Process
+from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from langchain_community.llms import OpenAI, Ollama
 from dotenv import load_dotenv
-from crewai_tools import SerperDevTool
-
-load_dotenv()
-
-
-# Initialize the Gemini model using LiteLLM
-# llm_gemini = litellm_model("gemini-1.5-flash-exp-0827")
-# llm_flash = Gemini(model="gemini-1.5-flash-exp-0827", temperature=0.5)
-# llm_llama = Ollama(model="llama3.1", base_url="http://localhost:11434")
-llm_mistral = Ollama(model="mistral-large-latest", base_url="http://localhost:11434")
-# llm_gemma = Ollama(model="gemma2:27b", base_url="http://localhost:11434")
-# llm_hermes = Ollama(model="hermes3:70b", base_url="http://localhost:11434")
-
-
-
-
-
-# manager_llm = ChatOllama(model="hermes3:70b")
-manager_llm = llm_mistral
-
-# Uncomment the following line to use an example of a custom tool
-# from conundrum_crew.tools.custom_tool import MyCustomTool
-
-# Check our tools documentations for more information on how to use them
+import litellm
 from crewai_tools import SerperDevTool
 
 search_tool = SerperDevTool()
 
-# Uncomment the following line to use an example of a custom tool
-# from conundrum.tools.custom_tool import MyCustomTool
+load_dotenv()
+litellm.api_key = os.getenv('GOOGLE_API_KEY')
+# Set the Google API key for LiteLLM to use Gemini LLM Models
 
-# Check our tools documentations for more information on how to use them
-# from crewai_tools import SerperDevTool
+# os.environ["GOOGLE_API_KEY"] = os.getenv('GOOGLE_API_KEY') 
+
+# Uncomment the following line to use an example of a custom tool
+# from conundrum_crew.tools.custom_tool import MyCustomTool
+ 
+
+
 
 @CrewBase
 class ConundrumCrew():
@@ -50,7 +32,7 @@ class ConundrumCrew():
 			config=self.agents_config['researcher'],
 			# tools=[MyCustomTool()], # Example of custom tool, loaded on the beginning of file
 			verbose=True,
-			llm=llm_mistral,
+			llm='ollama/hermes3:latest',
         	max_iterations=5,
         	max_time=120,
 			tools=[search_tool]
@@ -61,7 +43,7 @@ class ConundrumCrew():
 		return Agent(
 			config=self.agents_config['reporting_analyst'],
 			verbose=True,
-			llm=llm_mistral,
+			llm='ollama/gemma2:27b',
         	max_iterations=10,
         	max_time=120,	
 		)
@@ -86,8 +68,8 @@ class ConundrumCrew():
 		return Crew(
 			agents=self.agents, # Automatically created by the @agent decorator
 			tasks=self.tasks, # Automatically created by the @task decorator
-			manager_llm=llm_mistral,
-			process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
-			verbose=True,
+			manager_llm='gemini/gemini-1.5-flash-exp-0827', 
+			process=Process.hierarchical,
 			# process=Process.sequential,
+			verbose=True,
 		)
