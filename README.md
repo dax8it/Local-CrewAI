@@ -121,7 +121,7 @@ def get_user_topic():
 
 10. Two documents are generated, research.md and report.md
 
-11. YOu have the option of running an LLM_Manager as well. 
+11. Currently set up to run with an LLM Manager (Gemini currently) in hierarchical mode. 
 
 
 
